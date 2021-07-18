@@ -10,9 +10,10 @@ RSpec.describe 'Get Merchants', type: :request do
 
 # expect(response.status).to eq(200)
     expect(response).to be_successful
-    expect(merchants.count).to eq(3)
-    expect(merchants.class).to eq(Array)
-    expect(merchants.first).to have_key(:name)
-    expect(merchants.first[:name]).to be_a(String)
+    expect(merchants[:data].count).to eq(3)
+    expect(merchants[:data].class).to eq(Array)
+    expect(merchants[:data].first[:attributes]).to have_key(:name)
+    expect(merchants[:data].first[:attributes][:name]).to be_a(String)
+    require "pry";binding.pry 
   end
 end
