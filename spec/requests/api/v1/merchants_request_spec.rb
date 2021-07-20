@@ -53,8 +53,11 @@ RSpec.describe 'Get Merchants', type: :request do
 
       get api_v1_merchant_items_path("#{@merchant2.id}")
       merchant = JSON.parse(response.body, symbolize_names: true)
-      require "pry";binding.pry
-      expect()
+
+      expect(response).to be_successful
+      expect(merchant[:data].first.keys.length).to eq(3)
+      expect(merchant[:data].first[:attributes].keys.length).to eq(4)
+      expect(merchant[:data].count).to eq(25)
     end
   end
 end
