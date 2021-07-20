@@ -45,4 +45,16 @@ RSpec.describe 'Get Merchants', type: :request do
       expect(merchant[:data][:attributes][:name]).to eq("#{merchant1.name}")
     end
   end
+
+  describe 'all items for a merchant' do
+    it 'can show all items for a given merchant' do
+      @merchant2 = create(:merchant)
+      @items = create_list(:item, 25, merchant: @merchant2)
+
+      get api_v1_merchant_items_path("#{@merchant2.id}")
+      merchant = JSON.parse(response.body, symbolize_names: true)
+      require "pry";binding.pry
+      expect()
+    end
+  end
 end
