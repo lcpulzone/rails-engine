@@ -55,4 +55,26 @@ RSpec.describe 'Items Request' do
       expect(item[:data][:attributes][:name]).to eq("#{item5.name}")
     end
   end
+
+  describe 'create' do
+    it 'can create an item' do
+      merchant6 = create(:merchant)
+      item_params = {
+        name: "Llama",
+        description: "Cute animal, not a good pet",
+        unit_price: 5.99,
+        merchant_id: "#{merchant6.id}"
+        }
+
+      post '/api/v1/items', params: item_params
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(item[:data].count).to eq(3)
+      expect(item[:data][:attributes].count).to eq(4)
+      expect(item[:data][:attributes][:name].class).to eq(String)
+      expect(item[:data][:attributes][:unit_price].class).to eq(Float)
+    end
+  end
 end
