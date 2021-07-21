@@ -13,12 +13,13 @@ class Api::V1::ItemsController < ApplicationController
   def create
     merchant = Merchant.find(params[:merchant_id])
     item = merchant.items.create(item_params)
-    render json: ItemSerializer.new(item)
+    render json: ItemSerializer.new(item), status: :created
+    # render json: ItemSerializer.new(item), status: 201 -Both lines 16 & 17 are the same thing
   end
 
-  # def destroy
-  #   Item.delete(params[:id])
-  # end
+  def destroy
+    Item.destroy(params[:id])
+  end
 
   private
   def item_params
