@@ -17,6 +17,19 @@ class Api::V1::ItemsController < ApplicationController
     # render json: ItemSerializer.new(item), status: 201 -Both lines 16 & 17 are the same thing
   end
 
+  def update
+    begin
+      item = Item.find(params[:id])
+      if item.update(item_params)
+        render json: ItemSerializer.new(item)
+      else
+        render status: :not_found
+      end
+    rescue ActiveRecord::RecordNotFound
+      render status: :not_found
+    end
+  end
+
   def destroy
     Item.destroy(params[:id])
   end

@@ -1,7 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :items
 
-  # def self.page_limit(page, per_page)
-  #   Merchant.offset((page - 1) * per_page).limit(per_page))
-  # end
+  def self.find_name(name)
+    Merchant.where("name ILIKE ?" ,"%#{name}%").limit(1)
+  end
 end

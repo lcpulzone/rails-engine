@@ -78,6 +78,29 @@ RSpec.describe 'Items Request' do
     end
   end
 
+  describe 'update' do
+    xit 'can update an item' do
+      merchant8 = create(:merchant)
+      item8 = create(:item, merchant: merchant8)
+      new_name = "Alley Oop"
+
+      patch "/api/v1/items/#{item8.id}", params: new_name
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(item[:data][:attributes][:name]).to eq(new_name)
+    end
+
+    it 'can not find an item' do
+      patch "/api/v1/items/999"
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      # require "pry";binding.pry
+    end
+  end
+
   describe 'destroy' do
     it 'can destroy an item' do
       merchant6 = create(:merchant)
