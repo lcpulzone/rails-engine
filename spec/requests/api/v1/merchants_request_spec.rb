@@ -44,4 +44,16 @@ RSpec.describe 'Merchants Request', type: :request do
       expect(merchant[:data][:attributes][:name]).to eq("#{merchant1.name}")
     end
   end
+
+  describe 'non-restful route' do
+    it 'can find one merchant' do
+      merchant7 = create(:merchant)
+
+      get api_v1_merchants_find_path(name:"#{merchant7.name}")
+
+      merchant = JSON.parse(response.body, symbolize_names: true)
+# require "pry";binding.pry
+      expect(response).to be_successful
+    end
+  end
 end
