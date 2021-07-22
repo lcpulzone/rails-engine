@@ -52,7 +52,6 @@ RSpec.describe 'Merchants Request', type: :request do
       get api_v1_merchants_find_path(name:"#{merchant7.name}")
 
       merchant = JSON.parse(response.body, symbolize_names: true)
-# require "pry";binding.pry
       expect(response).to be_successful
     end
   end
