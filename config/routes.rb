@@ -24,11 +24,3 @@ Rails.application.routes.draw do
   #   end
   # end
 end
-
-#     scope module: :merchants do
-#       resources :merchants, controller: :resources do
-#         resources :items, controller: :merchant_items, only: :index
-#       end
-#     end
-#   end
-# end
