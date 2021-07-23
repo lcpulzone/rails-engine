@@ -82,14 +82,14 @@ RSpec.describe 'Items Request' do
     it 'can update an item' do
       merchant8 = create(:merchant)
       item8 = create(:item, merchant: merchant8)
-      new_name = "Alley Oop"
+      new_name = {name: "Alley Oop"}
 
       patch "/api/v1/items/#{item8.id}", params: new_name
 
       item = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
-      expect(item[:data][:attributes][:name]).to eq(new_name)
+      expect(item[:data][:attributes][:name]).to eq(new_name[:name])
     end
   end
 
